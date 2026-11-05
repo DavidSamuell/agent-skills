@@ -79,12 +79,14 @@ Prefer a native integration? Pick your tool below.
 <details>
 <summary><b>Claude Code (recommended)</b></summary>
 
-**Marketplace install:**
+**Marketplace install (this fork):**
 
 ```
-/plugin marketplace add addyosmani/agent-skills
-/plugin install agent-skills@addy-agent-skills
+/plugin marketplace add DavidSamuell/agent-skills
+/plugin install agent-skills@davidsamuell-agent-skills
 ```
+
+Uninstall upstream `agent-skills@addy-agent-skills` first: both plugins are named `agent-skills`, so their commands collide.
 
 > **SSH errors?** The marketplace clones repos via SSH. If you don't have SSH keys set up on GitHub, either [add your SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) or use the full HTTPS URL to force HTTPS cloning during the marketplace-add step:
 > ```bash
