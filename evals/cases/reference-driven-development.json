@@ -1,0 +1,43 @@
+{
+  "skill_name": "reference-driven-development",
+  "trigger": {
+    "positive": [
+      {
+        "prompt": "Port the retry logic from this Rust crate to our TypeScript client",
+        "top_k": 3
+      },
+      {
+        "prompt": "Do it exactly like the old notebook does it",
+        "top_k": 3
+      },
+      {
+        "prompt": "Match the behaviour of the legacy pipeline in the new package",
+        "top_k": 3
+      }
+    ],
+    "negative": [
+      {
+        "prompt": "Check the official React docs before implementing this hook",
+        "owner": "source-driven-development"
+      },
+      {
+        "prompt": "Brainstorm a few directions for this feature",
+        "owner": "idea-refine"
+      }
+    ]
+  },
+  "evals": [
+    {
+      "id": 1,
+      "kind": "dialogue",
+      "prompt": "Reimplement the data split logic from notebooks/experiment_2024.ipynb as a function in src/data/split.py.",
+      "expected_output": "Follows the reference-driven-development workflow",
+      "expectations": [
+        "A plain-language behaviour summary is written before new code",
+        "The reference is pinned to a commit or version",
+        "A copy / adapt / leave-out decision is presented",
+        "A differential check or edge-case tests compare against the reference"
+      ]
+    }
+  ]
+}

@@ -17,6 +17,8 @@ When a task arrives, identify the development phase and apply the corresponding 
 Task arrives
     │
     ├── Don't know what you want yet? ──────→ interview-me
+    ├── Unfamiliar domain / what am I missing? → blind-spot-pass
+    ├── "Do it like this code/notebook"? ───→ reference-driven-development
     ├── Have a rough concept, need variants? → idea-refine
     ├── New project/feature/change? ──→ spec-driven-development
     ├── No quality bar written down? ──→ constraint-driven-development
@@ -27,9 +29,11 @@ Task arrives
     │   ├── Need better context? ─────→ context-engineering
     │   ├── Need doc-verified code? ───→ source-driven-development
     │   └── Stakes high / unfamiliar code? ──→ doubt-driven-development
+    │   └── Keeping a decision/deviation log? → implementation-notes
     ├── Writing/running tests? ────────→ test-driven-development
     │   └── Browser-based? ───────────→ browser-testing-with-devtools
     ├── Something broke? ──────────────→ debugging-and-error-recovery
+    ├── Need to understand/pitch the change? → explain-and-quiz
     ├── Reviewing code? ───────────────→ code-review-and-quality
     │   ├── Too complex? ─────────────→ code-simplification
     │   ├── Security concerns? ───────→ security-and-hardening
@@ -144,15 +148,17 @@ For a complete feature, the typical skill sequence is:
 
 ```
 1.  interview-me                → Extract what the user actually wants
+    blind-spot-pass             → Surface unknown unknowns (unfamiliar territory)
 2.  idea-refine                 → Refine vague ideas
 3.  spec-driven-development     → Define what we're building
 4.  planning-and-task-breakdown → Break into verifiable chunks
 5.  context-engineering         → Load the right context
 6.  source-driven-development   → Verify against official docs
-7.  incremental-implementation  → Build slice by slice
+7.  incremental-implementation  → Build slice by slice (with implementation-notes)
 8.  observability-and-instrumentation → Instrument as you build (runs parallel with 7-9, not after)
 9.  doubt-driven-development    → Cross-examine non-trivial decisions in-flight
 10. test-driven-development     → Prove each slice works
+    explain-and-quiz            → Prove you understand the change
 11. code-review-and-quality     → Review before merge
 12. code-simplification         → Reduce unnecessary complexity while preserving behavior
 13. git-workflow-and-versioning → Clean commit history
@@ -168,10 +174,13 @@ Not every task needs every skill. A bug fix might only need: `debugging-and-erro
 | Phase | Skill | One-Line Summary |
 |-------|-------|-----------------|
 | Define | interview-me | Surface what the user actually wants before any plan, spec, or code exists |
+| Define | blind-spot-pass | Surface unknown unknowns, calibrated to the user, before any spec |
+| Define | reference-driven-development | Use existing code or an old system as the spec; verify with a differential check |
 | Define | idea-refine | Refine ideas through structured divergent and convergent thinking |
 | Define | spec-driven-development | Requirements and acceptance criteria before code |
 | Plan | planning-and-task-breakdown | Decompose into small, verifiable tasks |
 | Build | incremental-implementation | Thin vertical slices, test each before expanding |
+| Build | implementation-notes | Log unplanned decisions and conservative deviations as you build |
 | Build | source-driven-development | Verify against official docs before implementing |
 | Build | doubt-driven-development | Adversarial fresh-context review of every non-trivial decision |
 | Build | context-engineering | Right context at the right time |
@@ -180,6 +189,7 @@ Not every task needs every skill. A bug fix might only need: `debugging-and-erro
 | Verify | test-driven-development | Failing test first, then make it pass |
 | Verify | browser-testing-with-devtools | Chrome DevTools MCP for runtime verification |
 | Verify | debugging-and-error-recovery | Reproduce → localize → fix → guard |
+| Review | explain-and-quiz | Explainer or pitch, then a comprehension quiz gating the merge |
 | Review | code-review-and-quality | Five-axis review with quality gates |
 | Review | code-simplification | Preserve behavior while reducing unnecessary complexity |
 | Review | security-and-hardening | OWASP prevention, input validation, least privilege |

@@ -1,0 +1,43 @@
+{
+  "skill_name": "implementation-notes",
+  "trigger": {
+    "positive": [
+      {
+        "prompt": "Keep implementation notes while you build this",
+        "top_k": 3
+      },
+      {
+        "prompt": "Log your deviations from the spec as you go",
+        "top_k": 3
+      },
+      {
+        "prompt": "Start a decision log for this build",
+        "top_k": 3
+      }
+    ],
+    "negative": [
+      {
+        "prompt": "Write an ADR for choosing Postgres",
+        "owner": "documentation-and-adrs"
+      },
+      {
+        "prompt": "Write a failing test for this bug",
+        "owner": "test-driven-development"
+      }
+    ]
+  },
+  "evals": [
+    {
+      "id": 1,
+      "kind": "dialogue",
+      "prompt": "Implement task 2 from tasks/plan.md and keep implementation notes.",
+      "expected_output": "Follows the implementation-notes workflow",
+      "expectations": [
+        "tasks/impl-notes.md is created before the first code change",
+        "Unplanned decisions are logged with file:line",
+        "Deviations take the conservative option and are logged rather than silently improvised",
+        "Irreversible or Ask-first items are escalated, not logged as deviations"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "skill_name": "blind-spot-pass",
+  "trigger": {
+    "positive": [
+      {
+        "prompt": "Do a blind spot pass before I start on this feature",
+        "top_k": 3
+      },
+      {
+        "prompt": "What am I missing? I'm new to this codebase and to model deployment",
+        "top_k": 3
+      },
+      {
+        "prompt": "What are my unknown unknowns for training my first speech model?",
+        "top_k": 3
+      }
+    ],
+    "negative": [
+      {
+        "prompt": "Interview me about what I actually want before building",
+        "owner": "interview-me"
+      },
+      {
+        "prompt": "Stress-test the plan I already wrote",
+        "owner": "doubt-driven-development"
+      }
+    ]
+  },
+  "evals": [
+    {
+      "id": 1,
+      "kind": "dialogue",
+      "prompt": "I'm an ML engineer with no frontend experience. Do a blind spot pass before I build a dashboard for our model metrics in this repo.",
+      "expected_output": "Follows the blind-spot-pass workflow",
+      "expectations": [
+        "Calibration (role, strengths, gaps) is stated before the list",
+        "Items are ranked and capped at roughly ten",
+        "Each item has a concrete cheap check",
+        "No solution or architecture is proposed"
+      ]
+    }
+  ]
+}

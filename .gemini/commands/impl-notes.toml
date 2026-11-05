@@ -1,0 +1,12 @@
+description = "Start or update tasks/impl-notes.md — log unplanned decisions, deviations (conservative choice), surprises and open questions"
+
+prompt = """
+Invoke the implementation-notes skill.
+
+$ARGUMENTS
+
+1. Create tasks/impl-notes.md if missing (Decisions / Deviations / Surprises / Open questions), linked to the spec and plan.
+2. For the rest of this build, log each unplanned decision at the moment it is made, one line with file:line.
+3. Deviation rule: if the item is irreversible or in the spec's Ask-first/Never boundaries, stop and ask; otherwise take the conservative option, log it under Deviations, and continue.
+4. If called at the end of a build: close out — resolve or list open questions, add a 3-line summary at the top, and link the notes from the PR.
+"""
