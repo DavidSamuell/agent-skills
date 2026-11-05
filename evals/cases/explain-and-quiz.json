@@ -1,0 +1,43 @@
+{
+  "skill_name": "explain-and-quiz",
+  "trigger": {
+    "positive": [
+      {
+        "prompt": "Quiz me on what you just built before I merge",
+        "top_k": 3
+      },
+      {
+        "prompt": "Write an explainer of this change and test my understanding",
+        "top_k": 3
+      },
+      {
+        "prompt": "I can't fully explain what the agent built, help me understand it",
+        "top_k": 3
+      }
+    ],
+    "negative": [
+      {
+        "prompt": "Review this diff for bugs and security issues",
+        "owner": "code-review-and-quality"
+      },
+      {
+        "prompt": "Write the pre-launch checklist",
+        "owner": "shipping-and-launch"
+      }
+    ]
+  },
+  "evals": [
+    {
+      "id": 1,
+      "kind": "dialogue",
+      "prompt": "We just finished the metrics dashboard. Explain the change and quiz me before I merge.",
+      "expected_output": "Follows the explain-and-quiz workflow",
+      "expectations": [
+        "The explainer covers how the change fits existing code paths",
+        "At least five behaviour questions are asked",
+        "Answers are not shown before the user responds",
+        "Merge is gated on a perfect score"
+      ]
+    }
+  ]
+}

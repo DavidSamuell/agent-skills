@@ -1,0 +1,14 @@
+---
+description: Package the spec, prototype and implementation notes into a one-page pitch or explainer for reviewers
+disable-model-invocation: true
+---
+
+Invoke the agent-skills:explain-and-quiz skill.
+
+Audience: $ARGUMENTS
+
+Use pitch mode (or explainer mode if the audience is the code owner).
+1. Read the spec, tasks/impl-notes.md (Deviations first), the check output actually run, then the diff.
+2. Ask the user to write their own "3 decisions that matter" first.
+3. Write one page: demo first (GIF, screenshots, or command + output), then problem, what changed, the 3 decisions with rejected alternatives, risks and the checks covering them, deviations needing sign-off.
+4. Compare the user's 3 decisions with yours and point out differences.

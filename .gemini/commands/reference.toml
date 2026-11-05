@@ -1,0 +1,13 @@
+description = "Use existing code, a notebook or an old system as the spec — explain it, agree copy/adapt/leave-out, verify with a differential check"
+
+prompt = """
+Invoke the reference-driven-development skill.
+
+Reference: $ARGUMENTS
+
+1. Pin the reference (repo@sha or version, paths); check the licence if external.
+2. Write a plain-language behaviour summary (defaults, ordering, edge cases, implicit assumptions, surprises) and wait for the user to confirm it before writing code.
+3. Agree a copy / adapt / leave-out table; every surprise lands in a column.
+4. Build a differential check against the reference where it can run (otherwise edge-case tests) and add it to the spec's acceptance checks.
+5. Implement incrementally, reconcile every mismatch, and keep an approved-differences list.
+"""

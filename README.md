@@ -1,5 +1,7 @@
 # Agent Skills
 
+> **Fork of [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills)** adding four critical-thinking skills from the *Finding your unknowns* field guide and *Critical thinking when agents do the work*: `blind-spot-pass`, `reference-driven-development`, `implementation-notes` and `explain-and-quiz`, with `/blind-spot`, `/reference`, `/impl-notes`, `/pitch` and `/quiz`.
+
 **Production-grade engineering skills for AI coding agents.**
 
 Skills encode the workflows, quality gates, and best practices that senior engineers use when building software. These ones are packaged so AI agents follow them consistently across every phase of development.
@@ -21,7 +23,7 @@ Skills encode the workflows, quality gates, and best practices that senior engin
 
 ## Commands
 
-9 slash commands that map to the development lifecycle. Each one activates the right skills automatically.
+14 slash commands that map to the development lifecycle. Each one activates the right skills automatically.
 
 | What you're doing | Command | Key principle |
 |-------------------|---------|---------------|
@@ -34,6 +36,11 @@ Skills encode the workflows, quality gates, and best practices that senior engin
 | Audit web performance | `/webperf` | Measure before you optimize |
 | Simplify the code | `/code-simplify` | Clarity over cleverness |
 | Ship to production | `/ship` | Faster is safer |
+| Find your unknown unknowns | `/blind-spot` | Know what you don't know |
+| Use code as the spec | `/reference` | Explain it before you copy it |
+| Log decisions while building | `/impl-notes` | Conservative, logged deviations |
+| Pitch the change to reviewers | `/pitch` | Lead with the demo |
+| Prove you understand it | `/quiz` | Merge only on a perfect score |
 
 In Claude Code these install as plugin commands. Where a built-in command has the same name, as `/review` does, use the namespaced form: `/agent-skills:review`.
 
@@ -48,7 +55,7 @@ Skills also activate automatically based on what you're doing — designing an A
 **Fastest path — any agent, one command.** The open [skills CLI](https://github.com/vercel-labs/skills) installs into 70+ agents (Claude Code, Cursor, Codex, Copilot, Cline, and more):
 
 ```bash
-npx skills add addyosmani/agent-skills            # install all 25 skills
+npx skills add addyosmani/agent-skills            # install all 29 skills
 npx skills add addyosmani/agent-skills --list     # browse before installing
 ```
 
@@ -72,12 +79,14 @@ Prefer a native integration? Pick your tool below.
 <details>
 <summary><b>Claude Code (recommended)</b></summary>
 
-**Marketplace install:**
+**Marketplace install (this fork):**
 
 ```
-/plugin marketplace add addyosmani/agent-skills
-/plugin install agent-skills@addy-agent-skills
+/plugin marketplace add DavidSamuell/agent-skills
+/plugin install agent-skills@davidsamuell-agent-skills
 ```
+
+Uninstall upstream `agent-skills@addy-agent-skills` first: both plugins are named `agent-skills`, so their commands collide.
 
 > **SSH errors?** The marketplace clones repos via SSH. If you don't have SSH keys set up on GitHub, either [add your SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) or use the full HTTPS URL to force HTTPS cloning during the marketplace-add step:
 > ```bash
@@ -221,9 +230,9 @@ Already installed? How you roll the pack out depends on your codebase. The **[Ad
 
 ---
 
-## All 25 Skills
+## All 29 Skills
 
-The commands above are entry points. The pack includes 25 skills total — 24 lifecycle skills plus the `using-agent-skills` meta-skill. Each skill is a structured workflow with steps, verification gates, and anti-rationalization tables. You can also reference any skill directly.
+The commands above are entry points. The pack includes 29 skills total — 28 lifecycle skills plus the `using-agent-skills` meta-skill. Each skill is a structured workflow with steps, verification gates, and anti-rationalization tables. You can also reference any skill directly.
 
 ### Meta - Discover which skill applies
 
@@ -236,6 +245,8 @@ The commands above are entry points. The pack includes 25 skills total — 24 li
 | Skill | What It Does | Use When |
 |-------|-------------|----------|
 | [interview-me](skills/interview-me/SKILL.md) | One-question-at-a-time interview that extracts what the user actually wants instead of what they think they should want, until ~95% confidence | The ask is underspecified, or the user invokes "interview me" / "grill me" |
+| [blind-spot-pass](skills/blind-spot-pass/SKILL.md) | Calibrated hunt for unknown unknowns: risks, conventions and best practices you don't know you're missing, ranked with a cheap check each | Entering an unfamiliar codebase, domain or technique, or unsure what best practice is |
+| [reference-driven-development](skills/reference-driven-development/SKILL.md) | Uses existing code, notebooks or an old system as the spec: explain it, agree copy/adapt/leave-out, verify with a differential check | "Do it like this", ports across languages, replacing a legacy pipeline |
 | [idea-refine](skills/idea-refine/SKILL.md) | Structured divergent/convergent thinking to turn vague ideas into concrete proposals | You have a rough concept that needs exploration |
 | [spec-driven-development](skills/spec-driven-development/SKILL.md) | Write a PRD covering objectives, commands, structure, code style, testing, and boundaries before any code | Starting a new project, feature, or significant change |
 | [constraint-driven-development](skills/constraint-driven-development/SKILL.md) | Interviews you for a quality bar with sane default thresholds, writes CONSTRAINTS.md, places each check by cost, and catches agents silencing checks or skipping tests to get green | No standards are written down, or an agent is producing more than anyone reads |
@@ -250,6 +261,7 @@ The commands above are entry points. The pack includes 25 skills total — 24 li
 
 | Skill | What It Does | Use When |
 |-------|-------------|----------|
+| [implementation-notes](skills/implementation-notes/SKILL.md) | Running log of unplanned decisions, conservative deviations, surprises and open questions during a build | Any build from a spec, especially long or autonomous runs and session handoffs |
 | [incremental-implementation](skills/incremental-implementation/SKILL.md) | Thin vertical slices - implement, test, verify, commit. Feature flags, safe defaults, rollback-friendly changes | Any change touching more than one file |
 | [test-driven-development](skills/test-driven-development/SKILL.md) | Red-Green-Refactor, test pyramid (80/15/5), test sizes, DAMP over DRY, Beyonce Rule, browser testing | Implementing logic, fixing bugs, or changing behavior |
 | [context-engineering](skills/context-engineering/SKILL.md) | Feed agents the right information at the right time - rules files, context packing, MCP integrations | Starting a session, switching tasks, or when output quality drops |
@@ -269,6 +281,7 @@ The commands above are entry points. The pack includes 25 skills total — 24 li
 
 | Skill | What It Does | Use When |
 |-------|-------------|----------|
+| [explain-and-quiz](skills/explain-and-quiz/SKILL.md) | Explainer or reviewer pitch built from evidence, then a behaviour quiz that gates the merge on a perfect score | After agent-driven builds, before merge, or when you can't fully explain what was built |
 | [code-review-and-quality](skills/code-review-and-quality/SKILL.md) | Five-axis review, change sizing (~100 lines), severity labels (Nit/Optional/FYI), review speed norms, splitting strategies | Before merging any change |
 | [code-simplification](skills/code-simplification/SKILL.md) | Chesterton's Fence, Rule of 500, reduce complexity while preserving exact behavior | Code works but is harder to read or maintain than it should be |
 | [security-and-hardening](skills/security-and-hardening/SKILL.md) | OWASP Top 10 prevention, auth patterns, secrets management, dependency auditing, three-tier boundary system | Handling user input, auth, data storage, or external integrations |
@@ -355,7 +368,7 @@ The portable core stays in shared directories. Host-specific paths are native di
 
 | Layer / consumer | Repository paths | Purpose |
 |---|---|---|
-| Shared workflow core | `skills/` (25 skills) | Portable `SKILL.md` workflows used by every integration |
+| Shared workflow core | `skills/` (29 skills) | Portable `SKILL.md` workflows used by every integration |
 | Shared review material | `agents/` (4 personas), `references/` (7 checklists) | Specialist reviewers and pack-level checklists carried by whole-repo installs |
 | Claude Code adapter | `.claude/commands/` (9 commands), `.claude-plugin/`, `hooks/` | Slash-command wrappers, marketplace metadata, and lifecycle hooks |
 | Gemini CLI adapter | `.gemini/commands/` (9 commands) | Gemini-native TOML command wrappers |

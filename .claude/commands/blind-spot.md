@@ -1,0 +1,14 @@
+---
+description: Run a blind spot pass — surface the unknown unknowns for this task before any spec or plan
+disable-model-invocation: true
+---
+
+Invoke the agent-skills:blind-spot-pass skill.
+
+$ARGUMENTS
+
+1. Calibrate: state (or ask once for) the user's role, strengths, gaps, the task in one sentence, and their own predicted approach.
+2. Look before listing: skim the relevant code, configs, tests and data paths; check current official docs for any named library or technique.
+3. Report at most ~10 blind spots, ranked by cost-if-missed × likelihood, each with why it matters here (file:line where possible) and a concrete cheap check.
+4. Add search terms and what you did not check. Do NOT propose a solution.
+5. Ask which items to resolve now, and suggest /agent-skills:interview-me or /spec as the next step.
