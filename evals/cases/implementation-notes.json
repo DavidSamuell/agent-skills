@@ -34,6 +34,7 @@
       "expected_output": "Follows the implementation-notes workflow",
       "expectations": [
         "tasks/impl-notes.md is created before the first code change",
+        "Current state is rewritten when the task ends, with a concrete next step and any blocker",
         "Unplanned decisions are logged with file:line",
         "Deviations take the conservative option and are logged rather than silently improvised",
         "Irreversible or Ask-first items are escalated, not logged as deviations"
