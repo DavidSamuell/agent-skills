@@ -7,7 +7,8 @@ Invoke the agent-skills:implementation-notes skill.
 
 $ARGUMENTS
 
-1. Create tasks/impl-notes.md if missing (Decisions / Deviations / Surprises / Open questions), linked to the spec and plan.
+1. Create tasks/impl-notes.md if missing (Current state / Decisions / Deviations / Surprises / Open questions), linked to the spec and plan. If it exists, read Current state first and resume from its Next step.
 2. For the rest of this build, log each unplanned decision at the moment it is made, one line with file:line.
-3. Deviation rule: if the item is irreversible or in the spec's Ask-first/Never boundaries, stop and ask; otherwise take the conservative option, log it under Deviations, and continue.
-4. If called at the end of a build: close out — resolve or list open questions, add a 3-line summary at the top, and link the notes from the PR.
+3. Rewrite Current state (last done, in progress, next step, blocked on) every time work stops: a task finished, a blocker, or the session ending.
+4. Deviation rule: if the item is irreversible or in the spec's Ask-first/Never boundaries, stop and ask; otherwise take the conservative option, log it under Deviations, and continue.
+5. If called at the end of a build: close out — resolve or list open questions, add a 3-line summary at the top, and link the notes from the PR.

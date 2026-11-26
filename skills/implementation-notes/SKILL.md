@@ -35,6 +35,13 @@ Create `tasks/impl-notes.md` (or next to the existing plan) before writing code:
 # Implementation notes: [feature] ([ticket / spec link])
 Spec: [path]  Plan: [path]  Started: [date]
 
+## Current state (overwrite every time you stop)
+- Updated: [date/time]
+- Last done: [task #] [one line] — [commit sha]
+- In progress: [task # and what's half-done, or "none"]
+- Next step: [the exact next action, specific enough to start cold]
+- Blocked on: [what and why, or "nothing"]
+
 ## Decisions (not covered by the spec)
 - [task #] [decision] — why: [...] — reversible: yes/no
 
@@ -52,7 +59,15 @@ Spec: [path]  Plan: [path]  Started: [date]
 
 Add an entry at the moment of the decision. Reconstructed notes miss exactly the small decisions that matter. One line each; link file:line.
 
-### Step 3: The deviation rule
+### Step 3: Update Current state every time you stop
+
+Current state is the only section you overwrite; the others are append-only. Rewrite it whenever work stops for any reason: a task finished, a single-task `/build` ended, a blocker was hit, the context is about to run out, or the session is ending. `tasks/todo.md` says which tasks are done; Current state says where the work actually is between and within tasks.
+
+- **Next step** must be concrete enough that a fresh session with no memory can start on it ("make `parseLabels` return the skipped count; failing test is `labels.test.ts:42`"), not "continue task 3".
+- **Blocked on** records the blocker in the file, not only in the chat, so the next session sees why the box is still unchecked.
+- A new session reads Current state first, then Deviations, then the plan.
+
+### Step 4: The deviation rule
 
 When an edge case conflicts with the spec, or the spec is silent where it matters:
 
@@ -61,10 +76,11 @@ When an edge case conflicts with the spec, or the spec is silent where it matter
 
 "Conservative" examples: exclude-and-count rather than drop silently; keep the old default rather than invent a new one; fail loudly rather than guess.
 
-### Step 4: Close out
+### Step 5: Close out
 
 At the end of the build:
 
+- Set Current state to "In progress: none", with the next step for the human (review, merge, follow-up)
 - Move resolved open questions into Decisions
 - Put a 3-line summary at the top: tasks done, number of deviations, the one deviation the reviewer must look at
 - Link the notes from the PR description and the ticket
@@ -80,17 +96,22 @@ The reviewer (or `explain-and-quiz`) reads Deviations before the diff.
 | "The spec was ambiguous, so I picked what seemed best" | "Best" is a guess; "conservative and logged" is reviewable. |
 | "Stopping to ask is safer" | Stopping for every edge case stalls the build; reserve stops for irreversible or Ask-first items. |
 | "The commit messages already say this" | Commits say what changed, not what the spec didn't cover or where you departed from it. |
+| "The todo checkboxes show where I am" | A checkbox is done or not done. It doesn't say what's half-built, what's next, or why it's blocked. |
+| "I told the user about the blocker in chat" | The next session can't read the chat. Write it in Current state. |
 
 ## Red Flags
 
 - A finished build with an empty Deviations section on a non-trivial spec
 - Notes written in one block at the end
+- Current state older than the last commit, or a vague "Next step" like "continue"
+- A build stopped on a blocker with "Blocked on: nothing"
 - A deviation on an "Ask first" / irreversible item that wasn't escalated
 - Notes not linked from the PR or ticket
 
 ## Verification
 
 - [ ] Notes file exists, created before the first code change
+- [ ] Current state was rewritten at the last stop and names a concrete next step
 - [ ] Every deviation has spec-said / did / because / file:line
 - [ ] No irreversible or Ask-first item handled as a silent deviation
 - [ ] Close-out summary at the top; open questions resolved or listed
